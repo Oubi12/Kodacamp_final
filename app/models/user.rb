@@ -10,4 +10,7 @@ class User < ApplicationRecord
     types: %i[voip mobile],
     countries: [:ph]
   }
+
+  enum role: { client: 0, admin: 1 }
+
 end
