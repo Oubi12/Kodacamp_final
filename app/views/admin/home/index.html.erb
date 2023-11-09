@@ -1,1 +1,4 @@
-<%= link_to 'Sign Out', destroy_admin_user_session_path, data: { 'turbo-method': :delete }, class: "nav-link #{'active' if action_name == 'sign in' }", 'aria-current': 'page' %>
+<%= link_to 'Sign Out', destroy_admin_user_session_path,
+            data: { 'turbo-method': :delete },
+            class: "nav-link #{'active' if action_name == 'sign in' }",
+            'aria-current': 'page' %>
