@@ -9,5 +9,6 @@
 
     <%= link_to "Shop", "", class: "nav-link" %>
 
+    <%= link_to "Me", me_path, class: "nav-link" if client_user_signed_in? %>
   </div>
 </nav>
