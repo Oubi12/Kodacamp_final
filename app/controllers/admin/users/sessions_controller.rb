@@ -24,7 +24,6 @@ class Admin::Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  class Admin::Users::SessionsController < Devise::SessionsController
     # before_action :configure_sign_in_params, only: [:create]
     before_action :check_user_role, only: [:create]
 
@@ -40,5 +39,4 @@ class Admin::Users::SessionsController < Devise::SessionsController
         redirect_to new_admin_user_session_path
       end
     end
-  end
 end
