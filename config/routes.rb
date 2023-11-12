@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'address/index'
+  get 'address/show'
   constraints(AdminDomainConstraint.new) do
     namespace :admin do
       root "home#index"
@@ -19,5 +21,6 @@ Rails.application.routes.draw do
     }
     get "/me", to: 'client/me#index'
   end
+  resources 'client/address', as: 'address', path: 'address', except: :show
   resources :menu , only: :index
 end

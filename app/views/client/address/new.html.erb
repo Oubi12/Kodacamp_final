@@ -1,0 +1,12 @@
+<%= render partial: 'client/form/nav' %>
+
+<div class="container mt-4 mb-5">
+  <div class="d-flex flex-row align-items-center">
+    <%= link_to 'Back', address_index_path, class: "btn btn-primary me-2"%>
+    <span class="fs-3 fw-semibold">Add new address</span>
+  </div>
+
+  <%= render partial: 'form', locals: { address: @address, url: address_index_path, method: :post }%>
+</div>
+
+<%= render partial: 'client/form/footer' %>

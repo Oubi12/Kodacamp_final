@@ -4,6 +4,7 @@ class Address::Region < ApplicationRecord
   validates :region_name, presence: true
 
   has_many :provinces
+  has_many :addresses
 
   def self.table_name_prefix
     "address_"

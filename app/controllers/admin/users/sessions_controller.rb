@@ -35,7 +35,7 @@ class Admin::Users::SessionsController < Devise::SessionsController
       if user && user.admin?
         sign_in(user, scope: :user) # Manually sign in the user
       else
-        flash[:alert] = "This login is only for admin."
+        flash[:alert] = I18n.t("devise.failure.invalid", authentication_keys: User.authentication_keys.first)
         redirect_to new_admin_user_session_path
       end
     end
