@@ -9,7 +9,8 @@ class PhLocationService
     data = JSON.parse(request.body)
     data.each do |region|
       address_region = Address::Region.find_or_initialize_by(code: region['code'])
-      address_region.name = region['regionName']
+      address_region.name = region['name']
+      address_region.region_name = region['regionName']
       address_region.save
     end
   end
