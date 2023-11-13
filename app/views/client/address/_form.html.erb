@@ -1,4 +1,13 @@
-<%= form_with model: address, url: url, method: method, data: { controller: 'location select2' }, class: 'form mt-2' do |f| %>
+<%= form_with model: address, url: url, method: method,
+              data: { controller: 'location select2', turbo: 'false' },
+              class: 'form mt-2' do |f| %>
+  <% if address.errors.any? %>
+    <ul>
+      <% address.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <div class="input-group w-100 mb-2">
     <%= f.label :type, class: 'input-group-text '%>
     <div class="form-control">

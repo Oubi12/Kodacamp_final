@@ -10,6 +10,8 @@ class Address < ApplicationRecord
   }
   validates :remark, presence: true
 
+  scope :default, -> { find_by(is_default: true) }
+
   belongs_to :user
   belongs_to :region
   belongs_to :province
