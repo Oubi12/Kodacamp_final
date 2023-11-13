@@ -8,12 +8,10 @@
       <%= raw @svg.html_safe %>
     </div>
 
-    <div class="input-group" style="width: 500px;">
-      <span class="form-control">client.com:3000/users/sign_up?promoter=<%= current_client_user.email %></span>
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa-solid fa-copy"></i></button>
+    <div class="input-group" style="width: 500px;" data-controller="clipboard">
+      <span class="form-control" data-clipboard-target="link">client.com:3000/users/sign_up?promoter=<%= current_client_user.email %></span>
+      <button class="btn btn-outline-secondary" data-action="click->clipboard#copy"><i class="fa-solid fa-copy"></i></button>
     </div>
-
-  </div>
 </div>
 
 <%= render partial: 'client/form/footer' %>
