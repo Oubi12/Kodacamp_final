@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :admin do
       root "home#index"
     end
-    devise_for :users, as: :admin, path: 'admin', controllers: {
+    devise_for :users, as: :admin, controllers: {
       sessions: 'admin/users/sessions'
     }, skip: [:registrations]
   end
@@ -15,11 +15,12 @@ Rails.application.routes.draw do
       root "home#index"
 
     end
-    devise_for :users, as: :client, path: 'client', controllers: {
+    devise_for :users, as: :client, controllers: {
       sessions: 'client/users/sessions',
       registrations: 'client/users/registrations'
     }
     get "/me", to: 'client/me#index'
+    get "/invite", to: 'client/invite#index'
     resources 'client/address', as: 'address', path: 'address', except: [:show, :edit]
   end
   namespace :api do
