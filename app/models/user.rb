@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum role: { client: 0, admin: 1 }
+
   validates :phone_number, phone: {
     possible: true,
     allow_blank: true,
@@ -17,6 +19,11 @@ class User < ApplicationRecord
 
   has_many :addresses
 
-  enum role: { client: 0, admin: 1 }
+  scope :with_children_total_deposit, -> {
+    joins("LEFT JOIN users AS children ON children.parent_id = users.id")
+      .group("users.id")
+      .select("users.*, COALESCE(SUM(children.total_deposit), 0) AS children_total_deposit")
+  }
+
 
 end
