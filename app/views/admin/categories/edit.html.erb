@@ -1,0 +1,16 @@
+<div class="vh-100 vw-100">
+  <%= render partial: 'admin/shared/top_nav' %>
+
+  <div class="d-flex flex-row h-100 w-100">
+    <%= render partial: 'admin/shared/side_nav' %>
+
+    <div class="p-4 w-100 mb-4">
+      <div class="d-flex flex-row align-items-center">
+        <%= link_to 'Back', categories_path, class: "btn btn-primary me-2"%>
+        <span class="fs-3 fw-semibold">Edit category</span>
+      </div>
+      <div class="w-100 border-bottom mx-2"></div>
+      <%= render partial: 'form', locals: { category: @category, url: category_path(@category), method: :post } %>
+    </div>
+  </div>
+</div>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     }, skip: [:registrations]
 
     resources 'admin/items', as: 'items', path: 'items'
+    resources 'admin/categories', as: 'categories', path: 'categories', except: [:show]
   end
 
   constraints(ClientDomainConstraint.new) do
