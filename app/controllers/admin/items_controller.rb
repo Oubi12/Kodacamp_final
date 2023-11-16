@@ -31,7 +31,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-    if @item.save
+    if @item.update(item_params)
       flash[:notice] = 'Item updated successfully'
       redirect_to items_path
     else
@@ -49,7 +49,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :quantity, :minimum_tickets, :batch_count)
+    params.require(:item).permit(:image, :name, :quantity, :minimum_tickets, :batch_count, category_ids: [])
   end
 
   def set_item

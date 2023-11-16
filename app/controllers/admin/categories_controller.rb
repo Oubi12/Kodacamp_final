@@ -15,7 +15,7 @@ class Admin::CategoriesController < ApplicationController
 
     if @category.save
       flash[:notice] = 'Category added.'
-      redirect_to category_index_path
+      redirect_to categories_path
     else
       flash[:alert] = 'Category saving failed.'
       render :new, status: :unprocessable_entity
@@ -26,7 +26,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def update
-    if @category.save
+    if @category.update(category_params)
       flash[:notice] = 'Category updated.'
       redirect_to categories_path
     else
@@ -36,8 +36,11 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
-    flash[:notice] = 'Category deleted.'
+    if @category.destroy
+      flash[:notice] = 'Category destroyed successfully'
+    else
+      flash[:alert] = @category.errors.full_messages.join(', ')
+    end
     redirect_to categories_path
   end
 
