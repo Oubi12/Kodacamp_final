@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     devise_for :users, as: :admin, controllers: {
       sessions: 'admin/users/sessions'
     }, skip: [:registrations]
+
+    resources 'admin/items', as: 'items', path: 'items'
   end
 
   constraints(ClientDomainConstraint.new) do
