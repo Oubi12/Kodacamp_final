@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :children, class_name: 'User', foreign_key: 'parent_id'
 
   has_many :addresses
+  has_many :tickets
 
   scope :with_children_total_deposit, -> {
     joins("LEFT JOIN users AS children ON children.parent_id = users.id")

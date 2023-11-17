@@ -19,7 +19,12 @@ class Item < ApplicationRecord
   has_many :categories, through: :item_category_ships
 
   def destroy
-    update(deleted_at: Time.current)
+    if tickets.present?
+      errors.add(:base, "Cannot delete item with associated tickets")
+      false
+    else
+      update(deleted_at: Time.current)
+    end
   end
 
   include AASM
@@ -42,7 +47,7 @@ class Item < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: :starting, to: :cancelled
+      transitions from: :starting, to: :cancelled, after: [:revert_quantity, :cancel_all_tickets]
     end
   end
 
@@ -58,6 +63,11 @@ class Item < ApplicationRecord
     update(quantity: quantity + 1, batch_count: batch_count - 1)
   end
 
+  def cancel_all_tickets
+    tickets.each do |ticket|
+      ticket.cancel!
+    end
+  end
   def quantity_enough?
     self.quantity > 0
   end
