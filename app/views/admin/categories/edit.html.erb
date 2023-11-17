@@ -10,7 +10,7 @@
         <span class="fs-3 fw-semibold">Edit category</span>
       </div>
       <div class="w-100 border-bottom mx-2"></div>
-      <%= render partial: 'form', locals: { category: @category, url: category_path(@category), method: :post } %>
+      <%= render partial: 'form', locals: { category: @category, url: category_path(@category), method: :patch } %>
     </div>
   </div>
 </div>
