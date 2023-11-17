@@ -3,9 +3,16 @@
   <div class="card-body d-flex flex-column">
     <span><%= item.name %></span>
     <small>Quantity: <%= item.quantity %></small>
+    <small>State: <%= item.state.humanize %></small>
     <small>Status: <%= item.status.humanize %></small>
     <small>Created at: <%= item.created_at %></small>
     <div class="w-100 border-bottom my-2"></div>
+    <%= form_with model: item, url: item_path(item), method: :patch do |f| %>
+      <%= f.submit 'Start', class: 'btn btn-sm btn-success w-100 mb-2' if item.may_start? %>
+      <%= f.submit 'Pause', class: 'btn btn-sm btn-warning w-100 mb-2' if item.may_pause? %>
+      <%= f.submit 'End', class: 'btn btn-sm btn-primary w-100 mb-2' if item.may_end? %>
+      <%= f.submit 'Cancel', class: 'btn btn-sm btn-danger w-100 mb-2' if item.may_cancel? %>
+    <% end %>
     <%= link_to 'Show', item_path(item), class: 'btn btn-primary btn-sm w-100 mb-2' %>
     <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-primary btn-sm w-100 mb-2' %>
     <%= button_to 'Delete', item_path(item), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger w-100" %>

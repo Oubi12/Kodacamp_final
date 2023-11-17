@@ -31,7 +31,19 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    if params[:commit] == 'Start' && @item.start!
+      flash[:notice] = 'Item updated successfully'
+      redirect_to items_path
+    elsif params[:commit] == 'Pause' && @item.pause!
+      flash[:notice] = 'Item updated successfully'
+      redirect_to items_path
+    elsif params[:commit] == 'End' && @item.end!
+      flash[:notice] = 'Item updated successfully'
+      redirect_to items_path
+    elsif params[:commit] == 'Cancel' && @item.cancel!
+      flash[:notice] = 'Item updated successfully'
+      redirect_to items_path
+    elsif @item.update(item_params)
       flash[:notice] = 'Item updated successfully'
       redirect_to items_path
     else
@@ -41,15 +53,25 @@ class Admin::ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    flash[:notice] = 'Item deleted successfully.'
+    if @item.destroy
+      flash[:notice] = 'Category destroyed successfully'
+    else
+      flash[:alert] = @item.errors.full_messages.join(', ')
+    end
     redirect_to items_path
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :quantity, :minimum_tickets, :batch_count, category_ids: [])
+    params.require(:item).permit(:image, :name,
+                                 :quantity, :minimum_tickets,
+                                 :start_at, :online_at, :offline_at,
+                                 :status, category_ids: [])
+  end
+
+  def set_item
+
   end
 
   def set_item
