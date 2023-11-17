@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get "/me", to: 'client/me#index'
     get "/invite", to: 'client/invite#index'
     resources 'client/address', as: 'address', path: 'address', except: [:show, :edit]
+    resources 'client/lottery', as: 'lottery', path: 'lottery', only: :index
   end
   namespace :api do
     namespace :v1 do
