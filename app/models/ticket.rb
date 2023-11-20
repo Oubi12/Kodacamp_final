@@ -3,6 +3,7 @@ class Ticket < ApplicationRecord
   validate :user_balance_enough?
   after_create :assign_serial_number
   after_create :deduct_coin_to_user
+  before_destroy :disable_destroy
 
   belongs_to :item
   belongs_to :user
@@ -54,5 +55,9 @@ class Ticket < ApplicationRecord
 
   def refund_coin
     user.update(coins: user.coins + 1)
+  end
+  def disable_destroy
+    errors.add(:base, 'Ticket cannot be destroyed.')
+    throw :abort
   end
 end

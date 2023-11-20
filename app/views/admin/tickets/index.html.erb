@@ -1,0 +1,44 @@
+<div class="vh-100 vw-100">
+  <%= render partial: 'admin/form/top_nav' %>
+
+  <div class="d-flex flex-row h-100 w-100">
+    <%= render partial: 'admin/form/side_nav' %>
+
+    <div class="p-4 w-100 mb-4 overflow-scroll">
+      <h3>Ticket List</h3>
+
+      <div class="w-100 border-bottom my-2"></div>
+
+      <%= form_with url: tickets_path, method: :get, class: 'w-100 form d-flex flex-row align-items-center justify-content-between mb-2', data: { turbo: false } do |f| %>
+        <div class="form-group w-100 me-2">
+          <%= f.text_field :search, value: params[:search], placeholder: "Search...", class: "form-control form-control-sm w-100" %>
+        </div>
+
+        <div class="form-group w-100 d-flex flex-row align-items-center me-2">
+          <span class="px-2">From: </span>
+          <%= f.date_field :start_date, value: params[:start_date], class: 'form-control form-control-sm'%>
+          <span class="px-2">to</span>
+          <%= f.date_field :end_date, value: params[:end_date], class: "form-control form-control-sm" %>
+        </div>
+
+        <div class="form-group me-2 w-100">
+          <%= f.collection_select :state, @states, :to_s, ->(state) { state.to_s.humanize }, {prompt: 'Filter state...', include_blank: false, selected: params[:state]  }, class: 'form-control form-control-sm w-100' %>
+        </div>
+
+        <%= f.submit 'Filter', class: 'btn btn-sm btn-primary me-2' %>
+        <%= link_to 'Reset', tickets_path, class: 'btn btn-sm btn-danger' %>
+      <% end %>
+      <% if @tickets.present? %>
+        <div class="d-flex flex-column">
+          <% @tickets.each_with_index do |ticket, index| %>
+            <%= render partial: 'admin/form/ticket_card', locals: { ticket: ticket, index: index } %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= render partial: 'admin/form/empty_list' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
