@@ -10,7 +10,7 @@
     <%= form_with model: item, url: item_path(item), method: :patch do |f| %>
       <%= f.submit 'Start', class: 'btn btn-sm btn-success w-100 mb-2' if item.may_start? %>
       <%= f.submit 'Pause', class: 'btn btn-sm btn-warning w-100 mb-2' if item.may_pause? %>
-      <%= f.submit 'End', class: 'btn btn-sm btn-primary w-100 mb-2' if item.may_end? %>
+      <%= f.submit 'End', class: 'btn btn-sm btn-danger w-100 mb-2' if item.may_end? %>
       <%= f.submit 'Cancel', class: 'btn btn-sm btn-danger w-100 mb-2' if item.may_cancel? %>
     <% end %>
     <%= link_to 'Show', item_path(item), class: 'btn btn-primary btn-sm w-100 mb-2' %>

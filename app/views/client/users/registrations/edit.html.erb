@@ -1,9 +1,11 @@
 <%= render partial: 'client/form/nav' %>
 
   <div class="container mb-5 mt-4 p-4 border rounded">
-    <div class="d-flex flex-row align-items-center mb-3">
-      <%= link_to "Back", :back, class: "btn btn-sm btn-primary me-2" %>
+    <div class="d-flex justify-content-between">
       <span class="fs-2 fw-medium">Edit <%= resource_name.to_s.humanize %></span>
+      <div>
+        <%= link_to "Back", :back, class: "btn btn-sm btn-dark" %>
+      </div>
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
@@ -62,7 +64,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Update", class: "btn btn-primary w-100" %>
+        <%= f.submit "Update", class: "btn btn-success w-100" %>
       </div>
     <% end %>
 
@@ -70,7 +72,10 @@
     <div class="w-100 border-bottom mb-2"></div>
 
     <div>
-      <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "mt-2 btn btn-danger w-100" %>
+      <%= button_to "Delete my account", registration_path(resource_name),
+                    data: { confirm: "Are you sure?",
+                            turbo_confirm: "Are you sure?" },
+                    method: :delete, class: "mt-2 btn btn-danger w-100" %>
     </div>
   </div>
 
