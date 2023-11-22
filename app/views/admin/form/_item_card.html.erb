@@ -4,8 +4,10 @@
     <span><%= item.name %></span>
     <small>Quantity: <%= item.quantity %></small>
     <small>State: <%= item.state.humanize %></small>
+    <small>Batch Count: <%= item.batch_count %></small>
+    <small>Categories: <%= item.categories.first&.name %></small>
     <small>Status: <%= item.status.humanize %></small>
-    <small>Created at: <%= item.created_at %></small>
+    <small>Created at: <%= item.created_at.strftime("%m/%d/%Y") %></small>
     <div class="w-100 border-bottom my-2"></div>
     <%= form_with model: item, url: item_path(item), method: :patch do |f| %>
       <%= f.submit 'Start', class: 'btn btn-sm btn-success w-100 mb-2' if item.may_start? %>

@@ -1,5 +1,5 @@
 class Client::AddressController < ApplicationController
-  before_action :set_address, only: [:update, :destroy]
+  before_action :set_address, only: [:update, :destroy, :default]
   before_action :get_default_address, only: [:update]
 
   def index
@@ -21,18 +21,23 @@ class Client::AddressController < ApplicationController
 
 
   def update
-    if params[:commit] == 'Set as default'
-      if @default_address.present?
-        @default_address.is_default = false
-        @default_address.save
-      end
-
-      @address.is_default = true
-      if @address.save
-        flash[:notice] = 'Changed default address.'
-        redirect_to address_index_path
-      end
+    if @address.update(address_params)
+      flash[:notice] = 'Address updated successfully'
+      redirect_to client_address_index_path
+    else
+      flash.now[:alert] = @address.errors.full_messages.join(', ')
+      render :edit, status: :unprocessable_entity
     end
+  end
+
+  def default
+    if @address.update(is_default:true)
+      flash[:notice] = "Address set to default."
+    else
+      flash[:notice] = "Failed to set default"
+    end
+    current_client_user.addresses.where.not(id: @address.id).update(is_default: false)
+    redirect_to address_index_path
   end
 
   def destroy

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources 'admin/tickets', as: 'tickets', path: 'tickets', only: [:index, :update]
   end
 
+
   constraints(ClientDomainConstraint.new) do
     namespace :client do
       root "home#index"
@@ -25,9 +26,15 @@ Rails.application.routes.draw do
     }
     get "/me", to: 'client/me#index'
     get "/invite", to: 'client/invite#index'
-    resources 'client/address', as: 'address', path: 'address', except: [:show, :edit]
+    resources 'client/address', as: 'address', path: 'address', except: [:show, :edit] do
+      member do
+        patch 'default'
+      end
+    end
     resources 'client/lottery', as: 'lottery', path: 'lottery', only: :index
   end
+
+
   namespace :api do
     namespace :v1 do
       resources :regions, only: [:index, :show], defaults: { format: :json } do

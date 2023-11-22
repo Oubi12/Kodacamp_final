@@ -27,9 +27,9 @@
           <span>Minimum tickets: <%= @item.minimum_tickets %></span>
           <span>State: <%= @item.state ? @item.state : "None" %></span>
           <span>Batch count: <%= @item.batch_count %></span>
-          <span>Online at: <%= @item.online_at ? @item.online_at : "None" %></span>
-          <span>Offline at: <%= @item.offline_at ? @item.offline_at : "None" %></span>
-          <span>Start at: <%= @item.start_at ? @item.start_at : "None" %></span>
+          <span>Online at: <%= @item.online_at ? @item.online_at.strftime("%m/%d/%Y") : "None" %></span>
+          <span>Offline at: <%= @item.offline_at ? @item.offline_at.strftime("%m/%d/%Y") : "None" %></span>
+          <span>Start at: <%= @item.start_at ? @item.start_at.strftime("%m/%d/%Y") : "None" %></span>
           <span>Status: <%= @item.status %></span>
         </div>
       </div>
