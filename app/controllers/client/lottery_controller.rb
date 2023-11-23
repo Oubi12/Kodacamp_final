@@ -19,7 +19,9 @@ class Client::LotteryController < ApplicationController
   end
 
   def show
-    @progress = 56
+    total_tickets = Ticket.where(item: @item, batch_count: @item.batch_count).count
+    @progress = ((total_tickets / @item.minimum_tickets.to_f) * 100).round(2)
+    @progress >= 100 ? @progress = 100 : @progress
     @user_tickets = Ticket.where(user: current_client_user,
                                  item: @item, batch_count: @item.batch_count)
   end

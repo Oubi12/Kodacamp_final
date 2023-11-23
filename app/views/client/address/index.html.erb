@@ -29,7 +29,7 @@
           </div>
 
           <div class="card-body d-flex flex-column py-2 px-4">
-            <span class="mb-1">Address: <%= address.street_address %>, <%= address.barangay.name %>, <%= address.city.name %>, <%= address.province.name %></span>
+            <span class="mb-1">Address: <%= full_address(address) %></span>
             <small>Remark: <%= address.remark %></small>
             <small>Phone Number: <%= address.phone_number %></small>
           </div>
