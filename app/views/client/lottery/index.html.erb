@@ -1,26 +1,29 @@
 <%= render partial: 'client/form/nav' %>
 
 <div class="container mb-5">
-  <%= render partial: 'client/form/home' %>
 
   <h5 class="w-100 border py-2 px-4 mt-2">Announcement: </h5>
 
   <%= link_to 'Button', '', class: 'btn btn-primary w-100 mt-2'%>
 
-  <div id="filter" class="d-flex flex-row align-items-center mt-2">
-    <%= form_tag lottery_index_path, method: 'get', data: { turbo: false } do %>
-      <%= submit_tag 'All', class: 'btn btn-sm border rounded-circle me-2'%>
-      <% @categories.each do |category| %>
-        <%= submit_tag category.name, class: 'btn btn-sm border rounded p-1 me-2'%>
-      <% end %>
-    <% end %>
+  <div id="button-category" class="mt-2 w-100">
+    <div id="filter" class="py-2 d-flex flex-row align-items-center m-2 ">
+      <%= link_to 'All', lottery_index_path, class: "btn btn-outline-primary #{'active' if params[:commit].blank?}" %>
+      <div class="d-flex justify-content-between" style="width: 300px">
+        <% @categories.each do |category| %>
+          <%= link_to category.name, lottery_index_path(commit: category.name), class: "btn btn-outline-primary m-auto category-button #{'active' if params[:commit] == category.name}" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <section class="d-flex flex-column justify-content-center align-items-center w-100">
+  <section class="d-flex flex-column justify-content-center align-items-center w-50">
     <div class="row row-cols-2 w-100 mt-2">
       <% @items.each do |item| %>
-        <div class="col w-50 mb-4">
-          <%= image_tag item.image.url, style: 'object-fit: cover;', class: 'w-100 h-100' if item.image.present? %>
+        <div class="col w-50 mb-4 border rounded transition-300">
+          <%= link_to lottery_path(item) do %>
+            <%= image_tag item.image.url, style: 'object-fit: cover;', class: 'w-100 h-100' if item.image.present? %>
+          <% end %>
         </div>
       <% end %>
     </div>

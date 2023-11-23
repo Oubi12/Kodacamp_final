@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     resources 'admin/tickets', as: 'tickets', path: 'tickets', only: [:index, :update]
   end
 
-
   constraints(ClientDomainConstraint.new) do
     namespace :client do
       root "home#index"
@@ -31,9 +30,9 @@ Rails.application.routes.draw do
         patch 'default'
       end
     end
-    resources 'client/lottery', as: 'lottery', path: 'lottery', only: :index
+    resources 'client/lottery', as: 'lottery', path: 'lottery', only: [:index, :show]
+    resources 'client/tickets', as: 'submit_tickets', path: 'submit_tickets', only: [:create]
   end
-
 
   namespace :api do
     namespace :v1 do
