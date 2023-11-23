@@ -12,11 +12,14 @@ class Address < ApplicationRecord
 
   scope :default, -> { find_by(is_default: true) }
 
-  belongs_to :user
-  belongs_to :region
-  belongs_to :province
-  belongs_to :city
+  has_many :winners
+
   belongs_to :barangay
+  belongs_to :city
+  belongs_to :province
+  belongs_to :region
+  belongs_to :user
+
   before_save :validate_address_count
 
   private

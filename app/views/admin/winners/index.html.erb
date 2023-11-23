@@ -1,0 +1,47 @@
+<div class="vh-100 vw-100">
+  <%= render partial: 'admin/form/top_nav' %>
+
+  <div class="d-flex flex-row h-100 w-100">
+    <%= render partial: 'admin/form/side_nav' %>
+
+    <div class="p-4 w-100 mb-4 overflow-scroll">
+      <h3>Winner List</h3>
+
+      <div class="w-100 border-bottom my-2"></div>
+
+      <%= form_with url: winners_path, method: :get, class: 'w-100 form d-flex flex-row align-items-center justify-content-between mb-2', data: { turbo: false } do |f| %>
+        <div class="row g-2">
+          <div class="col-md-3">
+            <%= f.text_field :search, value: params[:search], placeholder: "Search...", class: "form-control form-control-sm" %>
+          </div>
+
+          <div class="col-md-3">
+            <%= f.collection_select :state, @states, :to_s, ->(state) { state.to_s.humanize }, { prompt: 'Filter state...', include_blank: false, selected: params[:state] }, class: 'form-select form-select-sm' %>
+          </div>
+
+          <div class="col-md-5">
+            <div class="input-group input-daterange">
+              <span class="input-group-text">From</span>
+              <%= f.date_field :start_date, value: params[:start_date], class: 'form-control form-control-sm' %>
+              <span class="input-group-text">to</span>
+              <%= f.date_field :end_date, value: params[:end_date], class: 'form-control form-control-sm' %>
+            </div>
+          </div>
+        </div>
+
+        <%= f.submit 'Filter', class: 'btn btn-sm btn-primary me-2' %>
+        <%= link_to 'Reset', winners_path, class: 'btn btn-sm btn-danger' %>
+      <% end %>
+      <% if @winners.present? %>
+        <div class="d-flex flex-column">
+          <% @winners.each_with_index do |winner, index| %>
+            <%= render partial: 'admin/form/winner_card', locals: { winner: winner, index: index } %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= render partial: 'admin/form/empty_list' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

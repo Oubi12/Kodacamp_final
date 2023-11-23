@@ -9,9 +9,10 @@ Rails.application.routes.draw do
       sessions: 'admin/users/sessions'
     }, skip: [:registrations]
 
-    resources 'admin/items', as: 'items', path: 'items'
     resources 'admin/categories', as: 'categories', path: 'categories', except: [:show]
+    resources 'admin/items', as: 'items', path: 'items'
     resources 'admin/tickets', as: 'tickets', path: 'tickets', only: [:index, :update]
+    resources 'admin/winners', as: 'winners', path: 'winners', only: [:index, :update]
   end
 
   constraints(ClientDomainConstraint.new) do

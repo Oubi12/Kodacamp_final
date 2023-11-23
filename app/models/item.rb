@@ -12,11 +12,13 @@ class Item < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   default_scope { where(deleted_at: nil) }
+
   enum status: {inactive: 0, active: 1}
 
-  has_many :tickets
   has_many :item_category_ships
   has_many :categories, through: :item_category_ships
+  has_many :tickets
+  has_many :winners
 
   def destroy
     if tickets.present?
