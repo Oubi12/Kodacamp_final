@@ -1,13 +1,33 @@
-<div class="card border m-1" style="min-width: 250px; min-height: 250px">
-  <%= image_tag item.image.url, class:'card-img-top', style: 'object-fit: cover; max-height: 100px' if item.image.present? %>
+<div class="card border-dark m-1" style="min-width: 100px; min-height: 100px">
+  <%= image_tag item.image.url, class: 'card-img-top', style: 'object-fit: cover; max-height: 150px' if item.image.present? %>
   <div class="card-body d-flex flex-column">
-    <span><%= item.name %></span>
-    <small>Quantity: <%= item.quantity %></small>
-    <small>State: <%= item.state.humanize %></small>
-    <small>Batch Count: <%= item.batch_count %></small>
-    <small>Categories: <%= item.categories.first&.name %></small>
-    <small>Status: <%= item.status.humanize %></small>
-    <small>Created at: <%= item.created_at.strftime("%m/%d/%Y") %></small>
+    <h3><%= item.name %></h3>
+    <div class="details-column">
+      <div class="row">
+        <div class="col-6"><small><strong>Quantity:</strong></small></div>
+        <div class="col-6 text-right"><em><%= item.quantity %></em></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><small><strong>State:</strong></small></div>
+        <div class="col-6 text-right"><em><%= item.state.humanize %></em></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><small><strong>Batch Count:</strong></small></div>
+        <div class="col-6 text-right"><em><%= item.batch_count %></em></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><small><strong>Categories:</strong></small></div>
+        <div class="col-6 text-right"><em><%= item.categories.first&.name %></em></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><small><strong>Status:</strong></small></div>
+        <div class="col-6 text-right"><em><%= item.status.humanize %></em></div>
+      </div>
+      <div class="row">
+        <div class="col-6"><small><strong>Created at:</strong></small></div>
+        <div class="col-6 text-right"><em><%= item.created_at.strftime("%m/%d/%Y") %></em></div>
+      </div>
+    </div>
     <div class="w-100 border-bottom my-2"></div>
     <%= form_with model: item, url: item_path(item), method: :patch do |f| %>
       <%= f.submit 'Start', class: 'btn btn-sm btn-success w-100 mb-2' if item.may_start? %>
@@ -19,5 +39,4 @@
     <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-primary btn-sm w-100 mb-2' %>
     <%= button_to 'Delete', item_path(item), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger w-100" %>
   </div>
-
 </div>
