@@ -1,0 +1,34 @@
+<div class="vh-100 vw-100">
+  <%= render partial: 'admin/form/top_nav' %>
+
+  <div class="d-flex flex-row h-100 w-100">
+    <%= render partial: 'admin/form/side_nav' %>
+
+    <div class="p-4 w-100 mb-4">
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="d-flex flex-row align-items-center">
+          <%= link_to 'Back', offers_path, class: "btn btn-primary me-2"%>
+          <span class="fs-3 fw-semibold"><%= @offer.name %></span>
+        </div>
+
+        <div class="d-flex flex-row align-items-center">
+          <%= link_to 'Edit', edit_offer_path(@offer), class: "btn btn-primary me-2" %>
+          <%= button_to 'Delete', offer_path(@offer), method: :delete, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </div>
+
+      </div>
+
+      <div class="w-100 border-bottom my-2"></div>
+
+      <div class="d-flex flex-row justify-content-around container">
+        <%= image_tag @offer.image.url, class: 'me-4', style: 'object-fit: cover; width: 300px; height: 300px;' if @offer.image.present? %>
+        <div class="d-flex w-100 flex-column">
+          <span>Amount: <%= @offer.amount %></span>
+          <span>Coin: <%= @offer.coin %></span>
+          <span>Status: <%= @offer.status.humanize %></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

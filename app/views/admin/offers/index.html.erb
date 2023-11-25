@@ -1,0 +1,30 @@
+<div class="vh-100 vw-100">
+  <%= render partial: 'admin/form/top_nav' %>
+
+  <div class="d-flex flex-row h-100 w-100">
+    <%= render partial: 'admin/form/side_nav' %>
+
+    <div class="p-4 w-100 mb-4 overflow-scroll">
+      <div class="d-flex flex-row justify-content-between align-items-center mx-2">
+        <h3>Offer List</h3>
+        <%= link_to 'Add new offer', new_offer_path, class: 'btn btn-primary' %>
+      </div>
+
+      <div class="w-100 border-bottom my-2"></div>
+
+      <% if @offers.present? %>
+        <div class="row row-cols-*">
+          <% @offers.each do |offer| %>
+            <div class="col">
+              <%= render partial: 'admin/form/offer_card', locals: { offer: offer } %>
+            </div>
+          <% end %>
+        </div>
+
+      <% else %>
+        <%= render partial: 'admin/form/empty_list' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
