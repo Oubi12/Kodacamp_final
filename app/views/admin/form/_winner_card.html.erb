@@ -1,5 +1,6 @@
-<a class="form-control border nav-link mb-2 p-2 w-100" data-bs-toggle="collapse" href="#winner_detail_<%= index + 1 %>" role="button" aria-expanded="false" aria-controls="collapseExample">
-  <%= winner.ticket.serial_number %> | <%= winner.user.email %>
+<a class="form-control border nav-link mb-2 p-2 w-100" data-bs-toggle="collapse" href="#winner_detail_<%= index + 1 %>" role="button" aria-expanded="false" aria-controls="winner_detail_<%= index + 1 %>">
+  <%= winner.ticket.serial_number %> &nbsp; &nbsp; <%= winner.user.email %>
+  &nbsp; &nbsp; <%= winner.item.name %>
 </a>
 
 <div class="collapse mb-2" id="winner_detail_<%= index + 1 %>">
@@ -20,13 +21,13 @@
       </div>
     </div>
 
-    <%= form_tag winner_path(winner), method: :patch, data: {turbo: false} do %>
-      <%= submit_tag 'Submit', class:'btn btn-sm btn-danger' if winner.may_submit? %>
-      <%= submit_tag 'Pay', class:'btn btn-sm btn-danger' if winner.may_pay? %>
-      <%= submit_tag 'Ship', class:'btn btn-sm btn-danger' if winner.may_ship? %>
-      <%= submit_tag 'Deliver', class:'btn btn-sm btn-danger' if winner.may_deliver? %>
-      <%= submit_tag 'Publish', class:'btn btn-sm btn-danger' if winner.may_publish? %>
-      <%= submit_tag 'Remove Publish', class:'btn btn-sm btn-danger' if winner.may_remove_publish? %>
+    <%= form_tag winner_path(winner), method: :patch, data: { turbo: false } do %>
+      <%= submit_tag 'Submit', class: 'btn btn-sm btn-danger' if winner.may_submit? %>
+      <%= submit_tag 'Pay', class: 'btn btn-sm btn-danger' if winner.may_pay? %>
+      <%= submit_tag 'Ship', class: 'btn btn-sm btn-danger' if winner.may_ship? %>
+      <%= submit_tag 'Deliver', class: 'btn btn-sm btn-danger' if winner.may_deliver? %>
+      <%= submit_tag 'Publish', class: 'btn btn-sm btn-danger' if winner.may_publish? %>
+      <%= submit_tag 'Remove Publish', class: 'btn btn-sm btn-danger' if winner.may_remove_publish? %>
     <% end %>
   </div>
 </div>

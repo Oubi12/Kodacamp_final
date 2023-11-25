@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   validate :offline_at_in_future?
   validate :online_at_before_offline_at?
   validate :is_start_at_valid?
+  # validates_uniqueness_of :name, message: 'should be unique'
 
   mount_uploader :image, ImageUploader
 
