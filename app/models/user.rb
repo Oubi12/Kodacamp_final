@@ -15,12 +15,12 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   belongs_to :parent, class_name: 'User', optional: true, counter_cache: :children_members
-
-  has_many :addresses
-  has_many :bought_items, class_name: 'Winner', foreign_key: 'admin_id'
   has_many :children, class_name: 'User', foreign_key: 'parent_id'
+  has_many :addresses
   has_many :tickets
+  has_many :bought_items, class_name: 'Winner', foreign_key: 'admin_id'
   has_many :winning_items, class_name: 'Winner', foreign_key: 'user_id'
+  has_many :orders
 
   scope :with_children_total_deposit, -> {
     joins("LEFT JOIN users AS children ON children.parent_id = users.id")
