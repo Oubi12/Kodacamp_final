@@ -1,0 +1,22 @@
+<%= render partial: 'client/form/nav' %>
+
+<div class="container mb-5">
+  <%= render partial: 'client/form/home' %>
+
+  <h5 class="w-100 border py-2 px-4 mt-2">Announcement: </h5>
+
+  <section class="d-flex flex-column justify-content-center align-items-center w-100">
+    <div class="row row-cols-2 w-100 mt-2">
+      <% @offers.each do |offer| %>
+        <div class="col w-50 mb-4">
+          <%= link_to shop_path(offer) do %>
+            <%= image_tag offer.image.url, style: 'object-fit: cover;', class: 'w-100 h-100' if offer.image.present? %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+</div>
+
+<%= render partial: 'client/form/footer' %>

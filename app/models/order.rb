@@ -1,9 +1,8 @@
 class Order < ApplicationRecord
   validates :amount, presence: true
   validates :coin, presence: true
-  validates :remarks, presence: true
-  validates :amount, presence: true, if: :deposit?  # Ensure presence of amount for deposit orders
-  validates :amount, numericality: { greater_than: 0 }, if: -> { deposit? && amount.present? } # Ensure amount is greater than 0 for deposit orders
+  validates :amount, presence: true, if: :deposit?
+  validates :amount, numericality: { greater_than: 0 }, if: -> { deposit? && amount.present? }
   validates :offer, presence: true, if: :deposit?
   after_create :assign_serial_number
 

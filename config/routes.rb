@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     end
     resources 'client/lottery', as: 'lottery', path: 'lottery', only: [:index, :show]
     resources 'client/tickets', as: 'submit_tickets', path: 'submit_tickets', only: [:create]
+    resources 'client/shop', as: 'shop', path: 'shop', only: [:index, :show]
+    resources 'client/orders', as: 'purchase_orders', path: 'purchase_orders', only: [:create]
   end
 
   namespace :api do

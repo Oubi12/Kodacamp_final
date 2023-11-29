@@ -1,0 +1,21 @@
+<%= render partial: 'client/form/nav' %>
+
+<div class="container d-flex flex-column justify-content-center mb-5" style="max-width: 900px">
+  <div class="card w-100 mt-2 mb-2">
+    <%= image_tag @offer.image.url, class: 'card-img-top w-100' if @offer.image.url %>
+    <div class="card-body">
+      <h4><%= @offer.name %></h4>
+      <span>Amount: <%= @offer.amount %></span>
+      <span>Coins: <%= @offer.coin %></span>
+    </div>
+  </div>
+
+  <%= form_with url: purchase_orders_path, method: :post, class: 'mb-2' do |f| %>
+    <%= f.hidden_field :offer, value: @offer.id %>
+    <%= f.submit 'Purchase', class: 'w-100 btn btn-success' %>
+  <% end %>
+
+
+</div>
+
+<%= render partial: 'client/form/footer' %>
