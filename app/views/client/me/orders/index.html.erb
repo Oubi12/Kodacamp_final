@@ -1,0 +1,21 @@
+<%= render partial: 'client/form/nav' %>
+<%= link_to 'Back', me_path, class: "btn btn-dark me-2"%>
+
+
+<div class="container d-flex flex-row mb-2">
+  <%= link_to 'Order History', order_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'client/me' || 'client/me/orders'}", style: 'width: 200px' %>
+  <%= link_to 'Lottery History', '', class: "btn btn-secondary me-2 #{"active" if controller_name == 'client/me/lotteries'}", style: 'width: 200px' %>
+</div>
+
+<div class="container">
+  <% if @orders.present? %>
+    <% @orders.each do |order| %>
+      <%= render partial: 'client/me/form/order_card', locals: { order: order } %>
+    <% end %>
+  <% else %>
+    <%= render partial: 'client/form/empty_list' %>
+  <% end %>
+
+</div>
+
+<%= render partial: 'client/form/footer' %>

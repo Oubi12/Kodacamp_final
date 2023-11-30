@@ -1,22 +1,22 @@
 <%= render partial: 'client/form/nav' %>
 
 <div class="container-sm p-2 mt-4 border rounded">
-  <div class="d-flex flex-column">
-    <%# if current_client_user.image.present? %>
-<!--      <img src="<%#= current_client_user.image.url %>" alt="User Photo" class="mb-2" style="max-width: 100%; max-height: 200px;">-->
-    <%# elsif current_client_user.image.present? %>
-<!--      <img src="/desktop/photo" alt="Default Photo" class="mb-2" style="max-width: 100%; max-height: 200px;">-->
-    <%# else %>
-<!--      <img src="/path/to/default/photo.jpg" alt="Default Photo" class="mb-2" style="max-width: 100%; max-height: 200px;">-->
-    <%# end %>
-    <span class="mb-2">Username: <%= current_client_user.username %></span>
-    <small class="mb-2">Email: <%= current_client_user.email %></small>
-    <small class="mb-2">Coins: <%= current_client_user.coins %></small>
-  </div>
-
-  <%= link_to "Cash In Now", "", class: "btn btn-outline-success w-50 mb-2" %>
   <%= link_to "Edit Profile", edit_client_user_registration_path, class: "btn btn-outline-primary w-50 mb-2" %>
   <%= link_to "Address", address_index_path, class: "btn btn-outline-primary w-50 mb-2" %>
+  <div class="container d-flex flex-row mb-2">
+    <%= link_to 'Order History', order_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'orders'}", style: 'width: 200px' %>
+    <%= link_to 'Lottery History', lottery_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'lotteries'}", style: 'width: 200px' %>
+  </div>
+
+  <div class="container">
+    <% if @orders.present? %>
+      <% @orders.each do |order| %>
+        <%= render partial: 'client/me/form/order_card', locals: { order: order } %>
+  <% end %>
+  <% else %>
+      <%= render partial: 'client/form/empty_list' %>
+  <% end %>
+
 
 </div>
 

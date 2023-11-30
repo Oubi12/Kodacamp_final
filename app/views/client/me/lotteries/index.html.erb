@@ -1,0 +1,16 @@
+<%= render partial: 'client/form/nav' %>
+<%= link_to 'Back', me_path, class: "btn btn-dark me-2"%>
+
+
+<div class="container">
+  <% if @lotteries.present? %>
+    <% @lotteries.each do |lottery| %>
+      <%= render partial: 'client/me/form/lottery_card', locals: { lottery: lottery } %>
+    <% end %>
+  <% else %>
+    <%= render partial: 'client/form/empty_list' %>
+  <% end %>
+
+</div>
+
+<%= render partial: 'client/form/footer' %>

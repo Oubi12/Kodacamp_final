@@ -1,4 +1,4 @@
-class Client::MeController < ApplicationController
+class Client::Me::OrdersController < ApplicationController
   before_action :authenticate_client_user!
 
   def index
