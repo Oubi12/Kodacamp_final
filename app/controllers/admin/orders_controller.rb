@@ -26,6 +26,11 @@ class Admin::OrdersController < ApplicationController
     if params[:offer].present?
       @orders = @orders.where(offer_id: params[:offer])
     end
+
+    @subtotal_amount = @orders.pluck(:amount).sum
+    @total_amount = Order.sum(:amount)
+    @subtotal_coins = @orders.pluck(:coin).sum
+    @total_coins = Order.sum(:coin)
   end
 
   def update
