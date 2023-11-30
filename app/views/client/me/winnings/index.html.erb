@@ -2,9 +2,9 @@
 <%= link_to 'Back', me_path, class: "btn btn-dark me-2"%>
 
 <div class="container">
-  <% if @orders.present? %>
-    <% @orders.each do |order| %>
-      <%= render partial: 'client/me/form/order_card', locals: { order: order } %>
+  <% if @winnings.present? %>
+    <% @winnings.each do |winning| %>
+      <%= render partial: 'client/me/form/winning_card', locals: { winning: winning } %>
     <% end %>
   <% else %>
     <%= render partial: 'client/form/empty_list' %>

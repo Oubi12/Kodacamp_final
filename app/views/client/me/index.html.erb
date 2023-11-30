@@ -1,23 +1,19 @@
 <%= render partial: 'client/form/nav' %>
 
+
 <div class="container-sm p-2 mt-4 border rounded">
-  <%= link_to "Edit Profile", edit_client_user_registration_path, class: "btn btn-outline-primary w-50 mb-2" %>
-  <%= link_to "Address", address_index_path, class: "btn btn-outline-primary w-50 mb-2" %>
   <div class="container d-flex flex-row mb-2">
     <%= link_to 'Order History', order_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'orders'}", style: 'width: 200px' %>
     <%= link_to 'Lottery History', lottery_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'lotteries'}", style: 'width: 200px' %>
+    <%= link_to 'Winning History', winning_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'winnings'}", style: 'width: 200px' %>
+    <%= link_to 'Invitation History', invite_history_index_path, class: "btn btn-secondary me-2 #{"active" if controller_name == 'invites'}", style: 'width: 200px' %>
+
+    <%= link_to "Edit Profile", edit_client_user_registration_path, class: "btn btn-outline-primary", style: 'width: 200px' %>
+
+    <%= link_to "Address", address_index_path, class: "btn btn-outline-success", style: 'width: 200px' %>
+
   </div>
-
-  <div class="container">
-    <% if @orders.present? %>
-      <% @orders.each do |order| %>
-        <%= render partial: 'client/me/form/order_card', locals: { order: order } %>
-  <% end %>
-  <% else %>
-      <%= render partial: 'client/form/empty_list' %>
-  <% end %>
-
-
 </div>
+
 
 <%= render partial: 'client/form/footer' %>
