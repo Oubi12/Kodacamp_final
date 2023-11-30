@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources 'admin/tickets', as: 'tickets', path: 'tickets', only: [:index, :update]
     resources 'admin/winners', as: 'winners', path: 'winners', only: [:index, :update]
     resources 'admin/offers', as: 'offers', path: 'offers'
+    resources 'admin/orders', as: 'orders', path: 'orders', only: [:index, :update]
   end
 
   constraints(ClientDomainConstraint.new) do
