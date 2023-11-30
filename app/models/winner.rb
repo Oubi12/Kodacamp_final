@@ -1,11 +1,12 @@
 class Winner < ApplicationRecord
   validates :item_batch_count, presence: true
 
-  belongs_to :address
-  belongs_to :admin, class_name: 'User', optional: true
-  belongs_to :item
+
   belongs_to :ticket
   belongs_to :user
+  belongs_to :item
+  belongs_to :admin, class_name: 'User', optional: true
+  belongs_to :address, optional: true
 
   include AASM
   aasm column: :state do
@@ -13,7 +14,7 @@ class Winner < ApplicationRecord
     state :claimed, :submitted, :paid, :shipped, :delivered, :shared, :published, :remove_published
 
     event :claim do
-      transitions from: :won, to: :claimed
+      transitions from: :won, to: :claimed, guard: :has_address?
     end
 
     event :submit do
@@ -43,5 +44,10 @@ class Winner < ApplicationRecord
     event :remove_publish do
       transitions from: :published, to: :remove_published
     end
+  end
+  private
+
+  def has_address?
+    address.present?
   end
 end
