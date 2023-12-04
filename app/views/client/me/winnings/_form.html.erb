@@ -1,4 +1,5 @@
-<%= form_with model: winning, url: url, method: method, data: { controller: 'location select2', turbo: 'false' }, class: 'form mt-2' do |f| %>
+<%= form_with scope: :winner, url: url, method: method, data: { controller: 'location select2', turbo: 'false' },
+              class: 'form mt-2' do |f| %>
   <% if winning.errors.any? %>
     <ul>
       <% winning.errors.each do |error| %>
@@ -27,9 +28,9 @@
       <% end %>
     <% else %>
       <%= render partial: 'client/form/empty_list' %>
-      <%= link_to 'Add new address', new_address_path, class: 'w-100 btn btn-primary' %>
     <% end %>
   </div>
-
-  <%= f.submit 'Claim', class: 'btn btn-success w-100' %>
+  <%= f.hidden_field :address_id, value: @winning.address_id %>
+  <%= link_to 'Add new address', new_address_path, class: 'btn btn-primary' %>
+  <%= f.submit 'Claim', class: 'btn btn-success' %>
 <% end %>
