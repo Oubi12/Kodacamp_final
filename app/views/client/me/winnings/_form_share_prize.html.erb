@@ -1,0 +1,22 @@
+<%= form_with model: winning, url: share_prize_winning_history_path(winning), method: :patch, local: true do |f| %>
+
+  <% if winning.errors.any? %>
+    <ul>
+      <% winning.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :picture, class: 'form-label' %>
+    <%= f.file_field :picture, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :comment, class: 'form-label' %>
+    <%= f.text_area :comment, class: 'form-control', placeholder: 'Enter your message here...' %>
+  </div>
+
+  <%= f.submit 'Share', class: 'btn btn-success' %>
+<% end %>

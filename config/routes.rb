@@ -41,7 +41,8 @@ Rails.application.routes.draw do
     resources 'client/me/lotteries', as: 'lottery_history', path: 'me/lotteries', only: :index
     resources 'client/me/winnings', as: 'winning_history', path: 'me/winnings', only: [:index, :update] do
       member do
-        get 'claim_prize', to: 'client/me/winnings#edit', as: 'claim_prize'
+        get 'claim_prize', to: 'client/me/winnings#edit_claim_prize', as: 'claim_prize'
+        get 'share_prize', to: 'client/me/winnings#edit_share_prize', as: 'share_prize'
       end
     end
     resources 'client/me/invites', as: 'invite_history', path: 'me/invites', only: :index
