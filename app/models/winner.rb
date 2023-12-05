@@ -1,5 +1,6 @@
 class Winner < ApplicationRecord
   validates :item_batch_count, presence: true
+  validates :admin, presence: true, if: :submitted?
 
 
   belongs_to :ticket

@@ -19,6 +19,5 @@
       <%= link_to "#{winning.delivered? ? 'Share' : 'Shared'}", share_prize_winning_history_path(winning),
                   class: "btn btn-primary h-100 #{'disabled' unless winning.delivered?}" if winning.delivered? || winning.shared? || winning.published? || winning.remove_published? %>
     </div>
-
   </div>
 </div>
