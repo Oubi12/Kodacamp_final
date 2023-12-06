@@ -34,5 +34,12 @@ class Admin::OrdersController < ApplicationController
   end
 
   def update
+    @order = Order.find(params[:id])
+    if params[:commit] == 'Cancel'
+      if @order.may_cancel?
+        @order.cancel!
+      end
+    end
+    redirect_to orders_path
   end
 end
