@@ -18,8 +18,12 @@
       </div>
     </div>
 
-    <%= form_tag ticket_path(ticket), method: :patch, data: {turbo: false} do %>
-      <%= submit_tag 'Cancel', class:'btn btn-sm btn-danger' %>
+    <% if ticket.pending? %>
+      <%= form_tag ticket_path(ticket), method: :patch, data: { turbo: false } do %>
+        <%= submit_tag 'Cancel', class: 'btn btn-sm btn-danger' %>
+      <% end %>
+    <% else %>
+      <span class="text-muted">Ticket is already cancelled.</span>
     <% end %>
   </div>
 </div>

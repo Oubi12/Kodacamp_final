@@ -3,7 +3,7 @@ class Admin::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.all
+    @items = Item.all.includes(:tickets)
   end
 
   def show

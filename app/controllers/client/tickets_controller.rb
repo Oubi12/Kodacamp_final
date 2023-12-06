@@ -28,10 +28,7 @@ class Client::TicketsController < ApplicationController
   private
 
   def set_item
-    get_item_number = request.referrer.match(/\/(\d+)$/)
-    item_id = get_item_number[1] if get_item_number
-
-    @item = Item.find(item_id)
+    @item = Item.find(params[:item])
     unless @item
       flash[:alert] = 'Invalid item.'
       redirect_to lottery_index_path

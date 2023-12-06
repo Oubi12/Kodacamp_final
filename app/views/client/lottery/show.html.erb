@@ -11,6 +11,7 @@
     </div>
   </div>
   <%= form_with url: submit_tickets_path, method: :post, class: 'mb-2' do |f| %>
+    <%= f.hidden_field :item, value: @item.id %>
     <div class="input-group mb-2" data-controller="ticket">
       <button class="btn btn-outline-secondary" type="button" data-action="click->ticket#decrease">
         <i class="fa-solid fa-minus"></i>
@@ -27,7 +28,7 @@
     <div class="card w-100">
       <span class="card-header">Serial Number</span>
       <div class="d-flex flex-column w-100">
-        <% @user_tickets.each_with_index do |ticket, index| %>
+        <% @user_tickets.each_with_index do |ticket| %>
           <span class="border-bottom w-100 py-2 px-4 fw-semibold"><%= ticket.serial_number %></span>
         <% end %>
       </div>
