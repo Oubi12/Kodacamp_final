@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     resources 'client/tickets', as: 'submit_tickets', path: 'submit_tickets', only: [:create]
     resources 'client/shop', as: 'shop', path: 'shop', only: [:index, :show]
     resources 'client/orders', as: 'purchase_orders', path: 'purchase_orders', only: [:create]
+    resources 'client/shares', as: 'shares', path: 'shares', only: :index
+
     resources 'client/me/orders', as: 'order_history', path: 'me/orders', only: :index
     resources 'client/me/lotteries', as: 'lottery_history', path: 'me/lotteries', only: :index
     resources 'client/me/winnings', as: 'winning_history', path: 'me/winnings', only: [:index, :update] do
