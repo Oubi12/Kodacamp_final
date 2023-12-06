@@ -1,5 +1,5 @@
 <%= render partial: 'client/form/nav' %>
-<%= link_to 'Back', :back, class: 'btn btn-dark' %>
+<%= link_to 'Back', '#', class: 'btn btn-dark', onclick: 'history.go(-1); return false;' %>
 <div class="container d-flex flex-column justify-content-center mb-5" style="max-width: 900px">
   <div class="card w-100 mt-2 mb-2">
     <%= image_tag @item.image.url, class: 'card-img-top w-100' %>
