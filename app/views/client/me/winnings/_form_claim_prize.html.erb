@@ -15,7 +15,7 @@
       <% @addresses.each do |address| %>
         <div class="card w-100 mb-2">
           <div class="card-header d-flex flex-row align-items-center">
-            <%= f.radio_button :address_id, address.id, id: "address_#{address.id}", class: 'me-2' %>
+            <%= f.radio_button :address_id, address.id, class: 'me-2' %>
             <span><%= address.name %> <em><%= "(Default address)" if address.is_default? %></em></span>
           </div>
 
@@ -30,7 +30,7 @@
       <%= render partial: 'client/form/empty_list' %>
     <% end %>
   </div>
-  <%= f.hidden_field :address_id, value: @winning.address_id %>
+
   <%= link_to 'Add new address', new_address_path, class: 'btn btn-primary' %>
   <%= f.submit 'Claim', class: 'btn btn-success' %>
 <% end %>

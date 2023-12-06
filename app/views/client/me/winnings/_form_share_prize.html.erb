@@ -1,4 +1,4 @@
-<%= form_with model: winning, url: share_prize_winning_history_path(winning), method: :patch, local: true do |f| %>
+<%= form_with model: winning, url: winning_history_path(winning), method: :patch, local: true do |f| %>
 
   <% if winning.errors.any? %>
     <ul>

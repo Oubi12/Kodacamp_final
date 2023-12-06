@@ -39,4 +39,8 @@ class Client::Me::WinningsController < ApplicationController
   def claiming_prize_params
     params.require(:winner).permit(:address_id)
   end
+
+  def sharing_prize_params
+    params.require(:winner).permit(:picture, :comment)
+  end
 end
