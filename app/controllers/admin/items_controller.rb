@@ -27,29 +27,27 @@ class Admin::ItemsController < ApplicationController
   end
 
   def edit
-
+    @item = Item.find(params[:id])
   end
 
   def update
     if params[:commit] == 'Start' && @item.start!
-      flash[:notice] = 'Item updated successfully'
-      redirect_to items_path
+      flash[:notice] = 'Item started successfully'
     elsif params[:commit] == 'Pause' && @item.pause!
-      flash[:notice] = 'Item updated successfully'
-      redirect_to items_path
+      flash[:notice] = 'Item paused successfully'
     elsif params[:commit] == 'End' && @item.end!
-      flash[:notice] = 'Item updated successfully'
-      redirect_to items_path
+      flash[:notice] = 'Item ended successfully'
     elsif params[:commit] == 'Cancel' && @item.cancel!
-      flash[:notice] = 'Item updated successfully'
-      redirect_to items_path
+      flash[:notice] = 'Item canceled successfully'
     elsif @item.update(item_params)
       flash[:notice] = 'Item updated successfully'
-      redirect_to items_path
     else
       flash.now[:alert] = 'Item update failed.'
       render :edit, status: :unprocessable_entity
+      return
     end
+
+    redirect_to items_path
   end
 
   def destroy

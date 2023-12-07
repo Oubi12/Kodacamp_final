@@ -1,4 +1,6 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_admin_user!
+  before_action :set_order, only: :update
   def index
     @orders = Order.all.includes(:user, :offer)
     @states = Order.aasm.states.map(&:name)
@@ -35,11 +37,28 @@ class Admin::OrdersController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
+
     if params[:commit] == 'Cancel'
       if @order.may_cancel?
         @order.cancel!
+        flash[:notice] = 'Order canceled successfully.'
+      end
+    elsif params[:commit] == 'Pay'
+      if @order.may_pay?
+        if @order.pay!
+          flash[:notice] = 'Order paid successfully.'
+        else
+          flash[:alert] = 'Failed to process payment for the order.'
+        end
       end
     end
+
     redirect_to orders_path
+  end
+
+  private
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 end
